@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Вход в PayFlow</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen flex items-center justify-center">
   <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -12,7 +13,7 @@
       <span class="text-2xl font-bold">PayFlow</span>
     </div>
     <h2 class="text-2xl font-semibold mb-6">Добро пожаловать</h2>
-    <form>
+    <form id="loginForm">
       <div class="mb-4">
         <label class="block mb-2 text-sm">Email</label>
         <input type="email" required class="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
@@ -29,5 +30,36 @@
       <a href="signup.html" class="text-blue-600">Нет аккаунта? Зарегистрироваться</a>
     </p>
   </div>
+
+  <!-- Подключение Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script>
+    // Замените на ваш конфиг
+    const firebaseConfig = {
+      apiKey: "ВАШ_API_KEY",
+      authDomain: "ваш-проект.firebaseapp.com",
+      projectId: "ваш-проект",
+      appId: "1:..."
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Обработка входа
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      const password = e.target.querySelector('input[type="password"]').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          window.location.href = 'dashboard.html';
+        })
+        .catch((error) => {
+          alert('Ошибка входа: ' + error.message);
+        });
+    });
+  </script>
 </body>
 </html>

@@ -1,5 +1,1 @@
-{
-  "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}
+{ "routes": [ { "src": "/app/(.*)", "dest": "/app/$1" }, { "src": "/docs/(.*)", "dest": "/docs/$1" }, { "src": "/(.*)", "dest": "/index.html" } ] }
