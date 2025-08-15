@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+<script>
+  // Твой конфиг Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyD5uMFaEAq_GisN-viwUEs3mhN-nPEcDjA",
+    authDomain: "payflow-auth.firebaseapp.com",
+    projectId: "payflow-auth",
+    appId: "1:820412734805:web:6349df109a83a062a123dc"
+  };
+
+  // Инициализация
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // Обработка формы
+  document.getElementById('signupForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        alert('Успешно!');
+        window.location.href = 'dashboard.html';
+      })
+      .catch(error => {
+        alert('Ошибка: ' + error.message);
+      });
+  });
+</script>
   <meta charset="UTF-8" />
   <title>Вход в PayFlow</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
