@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
-<script>
-  // Твой конфиг Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyD5uMFaEAq_GisN-viwUEs3mhN-nPEcDjA",
-    authDomain: "payflow-auth.firebaseapp.com",
-    projectId: "payflow-auth",
-    appId: "1:820412734805:web:6349df109a83a062a123dc"
-  };
-
-  // Инициализация
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  // Обработка формы
-  document.getElementById('signupForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        alert('Успешно!');
-        window.location.href = 'dashboard.html';
-      })
-      .catch(error => {
-        alert('Ошибка: ' + error.message);
-      });
-  });
-</script>
   <meta charset="UTF-8" />
   <title>Регистрация в PayFlow</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Подключение Firebase (совместимость) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Твой конфиг Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5uMFaEAq_GisN-viwUEs3mhN-nPEcDjA",
+      authDomain: "payflow-auth.firebaseapp.com",
+      projectId: "payflow-auth",
+      appId: "1:820412734805:web:6349df109a83a062a123dc"
+    };
+
+    // Инициализация Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Обработка формы
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          alert('Регистрация успешна!');
+          window.location.href = 'dashboard.html';
+        })
+        .catch(error => {
+          alert('Ошибка: ' + error.message);
+        });
+    });
+  </script>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen flex items-center justify-center">
   <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -66,24 +68,5 @@
       <a href="login.html" class="text-blue-600">Уже есть аккаунт? Войти</a>
     </p>
   </div>
-  //  the functions you need from the SDKs you need
- { initializeApp } from "firebase/app";
- { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyD5uMFaEAq_GisN-viwUEs3mhN-nPEcDjA",
-  authDomain: "payflow-auth.firebaseapp.com",
-  projectId: "payflow-auth",
-  storageBucket: "payflow-auth.firebasestorage.app",
-  messagingSenderId: "820412734805",
-  appId: "1:820412734805:web:6349df109a83a062a123dc",
-  measurementId: "G-QJH7B3FN44"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+</body>
+</html>
